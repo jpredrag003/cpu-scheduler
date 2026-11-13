@@ -1,0 +1,527 @@
+﻿/* --- CSS Promenljive za teme --- */
+[data-theme="dark"] {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-light: #1e1b4b;
+    --danger: #f43f5e;
+    --danger-hover: #e11d48;
+    --danger-bg: rgba(244, 63, 94, 0.15);
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.15);
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-section: #111827;
+    --bg-element: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --table-th: #1a2234;
+    --hover-row: rgba(255, 255, 255, 0.02);
+    --empty-block: rgba(15, 23, 42, 0.6);
+    --grid-line: rgba(255, 255, 255, 0.06);
+    --summary-bg: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    --summary-border: #4338ca;
+    --summary-text: #c7d2fe;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --btn-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --focus-ring: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="light"] {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #e0e7ff;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --danger-bg: #fee2e2;
+    --success: #10b981;
+    --success-bg: #d1fae5;
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-section: #fdfdfe;
+    --bg-element: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --table-th: #f1f5f9;
+    --hover-row: #f8fafc;
+    --empty-block: rgba(226, 232, 240, 0.5);
+    --grid-line: rgba(0, 0, 0, 0.06);
+    --summary-bg: #eef2ff;
+    --summary-border: #c7d2fe;
+    --summary-text: #3730a3;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --btn-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.15);
+    --focus-ring: rgba(79, 70, 229, 0.25);
+}
+
+/* --- Osnovni stilovi --- */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 40px 20px;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.top-controls {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+.top-btn {
+    background: var(--bg-element);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--btn-shadow);
+    transition: all 0.2s;
+}
+.top-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+.top-btn:focus, .top-btn:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-right: 140px;
+}
+
+h1 {
+    color: var(--text-main);
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+p.desc {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.card-section {
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 25px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.input-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.input-group input, .input-group select {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    background: var(--bg-element);
+    color: var(--text-main);
+    transition: all 0.25s ease;
+}
+
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.btn-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    justify-content: flex-end;
+}
+
+/* --- Stilovi dugmadi i fokus stanja --- */
+button.action-btn {
+    padding: 12px 24px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: var(--btn-shadow);
+}
+button.action-btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+button.action-btn:focus, button.action-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+button.btn-danger {
+    padding: 12px 24px;
+    background-color: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: var(--btn-shadow);
+}
+button.btn-danger:hover { background-color: var(--danger-hover); }
+button.btn-danger:focus, button.btn-danger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+    background: var(--bg-card);
+}
+
+th, td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background-color: var(--table-th);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background-color: var(--hover-row); }
+
+.results-summary {
+    display: flex;
+    justify-content: space-around;
+    background: var(--summary-bg);
+    border: 1px solid var(--summary-border);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--summary-text);
+    font-size: 15px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.calculation-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.calculation-box h4 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-steps-list {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-muted);
+}
+.calc-steps-list li { margin-bottom: 12px; line-height: 1.6; }
+.calc-steps-list strong { color: var(--text-main); }
+
+/* --- GANTT DIJAGRAM (MOBILE-FRIENDLY OPTIMIZOVANO) --- */
+.gantt-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gantt-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.cpu-row {
+    display: flex;
+    align-items: stretch;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.cpu-label {
+    width: 130px;
+    min-width: 130px;
+    background: var(--table-th);
+    padding: 14px;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-right: 1px solid var(--border);
+}
+
+.gantt-track-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px 10px 16px;
+    position: relative;
+    overflow-x: auto; /* Ključno za mobilne - omogućava horizontalni skrol ako je dijagram dugačak */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Pozadinske vertikalne linije mreže */
+.gantt-chart-grid {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    right: 16px;
+    height: 50px;
+    display: flex;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.grid-line {
+    border-left: 1px dashed var(--grid-line);
+    height: 100%;
+    position: absolute;
+}
+
+.gantt-chart {
+    display: flex;
+    height: 50px;
+    min-width: max-content; /* Osigurava da se chart ne sabija na silu već zadržava razmeru */
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-main);
+    position: relative;
+    border: 1px solid var(--border);
+    z-index: 2;
+}
+
+.gantt-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+    border-right: 2px solid rgba(0, 0, 0, 0.25);
+    position: relative;
+    transition: filter 0.2s, transform 0.1s;
+    box-sizing: border-box;
+    padding: 0 6px;
+    min-width: 36px;
+}
+
+.gantt-block span.sub-time {
+    font-size: 9px;
+    font-weight: 500;
+    opacity: 0.85;
+    margin-top: 1px;
+}
+
+.gantt-block:hover {
+    filter: brightness(1.15);
+    cursor: pointer;
+    z-index: 5;
+}
+
+.gantt-empty {
+    background: var(--empty-block);
+    border-right: 1px dotted var(--border);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.gantt-timeline-axis {
+    display: flex;
+    position: relative;
+    height: 22px;
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: max-content;
+}
+
+.axis-marker {
+    position: absolute;
+    transform: translateX(-50%);
+    background: var(--bg-element);
+    padding: 1px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.badge-danger {
+    background: var(--danger-bg);
+    color: var(--danger);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background: var(--success-bg);
+    color: var(--success);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* --- Prilagođavanje za tablete i mobilne telefone (max 768px) --- */
+@media (max-width: 768px) {
+    body {
+        padding: 15px 10px;
+    }
+    .container {
+        padding: 20px 15px;
+        border-radius: 14px;
+    }
+    .top-controls { 
+        position: relative; 
+        top: 0; 
+        right: 0; 
+        margin: 0 auto 20px auto; 
+        width: 100%; 
+        justify-content: center; 
+    }
+    header { 
+        padding-right: 0; 
+        margin-bottom: 25px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .card-section {
+        padding: 16px;
+    }
+    
+    /* Gantt red prelazi u vertikalni položaj na mobilnom da bi labela bila pregledna */
+    .cpu-row { 
+        flex-direction: column; 
+    }
+    .cpu-label { 
+        width: 100%; 
+        min-width: 100%;
+        border-right: none; 
+        border-bottom: 1px solid var(--border); 
+        padding: 10px 14px;
+    }
+    .gantt-track-wrapper {
+        padding: 12px 10px 8px 10px;
+    }
+    .gantt-chart-grid {
+        top: 12px;
+        left: 10px;
+        right: 10px;
+    }
+}

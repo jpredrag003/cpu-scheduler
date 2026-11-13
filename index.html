@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="sr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulator CPU Raspoređivanja</title>
+    <!-- KaTeX za profesionalni prikaz formula -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <!-- CSS fajl -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <div class="top-controls">
+            <button class="top-btn" id="langToggleBtn" onclick="toggleLanguage()">
+                 <span id="langText">EN</span>
+            </button>
+            <button class="top-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </div>
+        
+        <header>
+            <h1 data-i18n="mainTitle">Simulator CPU Raspoređivanja</h1>
+            <p class="desc" id="algoDesc">Izaberite algoritam, arhitekturu sistema i pratite paralelno izvršavanje procesa u realnom vremenu.</p>
+        </header>
+
+        <section class="card-section">
+            <div class="section-title" data-i18n="configTitle">⚙️ Konfiguracija sistema i procesa</div>
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="systemType" data-i18n="lblArch">Arhitektura</label>
+                    <select id="systemType" onchange="handleSystemChange()">
+                        <option value="SINGLE" data-i18n="optSingle">Jednoprocesorski</option>
+                        <option value="SMP" selected data-i18n="optSmp">SMP (Simetrični)</option>
+                        <option value="ASYMMETRIC" data-i18n="optAsym">Asimetrični (Master-Slave)</option>
+                    </select>
+                </div>
+                <div class="input-group" id="cpuCountGroup">
+                    <label for="cpuCountInput" data-i18n="lblCpuCount">Broj procesora</label>
+                    <input type="number" id="cpuCountInput" min="2" max="8" value="2" oninput="renderTable()">
+                </div>
+                <div class="input-group">
+                    <label for="algorithmSelect" data-i18n="lblAlgo">Algoritam</label>
+                    <select id="algorithmSelect" onchange="handleAlgorithmChange()">
+                        <option value="FCFS">FCFS</option>
+                        <option value="SJF">SJF</option>
+                        <option value="RR">Round Robin (RR)</option>
+                        <option value="RMS">Rate Monotonic</option>
+                        <option value="EDF" selected>Earliest Deadline First</option>
+                    </select>
+                </div>
+                <div class="input-group" id="quantumGroup" style="display: none;">
+                    <label for="quantumInput" data-i18n="lblQuantum">Kvantum (Q)</label>
+                    <input type="number" id="quantumInput" min="1" value="2" oninput="renderTable()">
+                </div>
+                <div class="input-group">
+                    <label for="arrivalTime" data-i18n="lblArrival">Vreme dolaska</label>
+                    <input type="number" id="arrivalTime" min="0" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="burstTime" data-i18n="lblBurst">Izvršavanje</label>
+                    <input type="number" id="burstTime" min="1" value="5">
+                </div>
+                <div class="input-group" id="periodGroup" style="display: none;">
+                    <label for="periodInput" data-i18n="lblPeriod">Period (T)</label>
+                    <input type="number" id="periodInput" min="1" value="10">
+                </div>
+                <div class="input-group" id="deadlineGroup" style="display: none;">
+                    <label for="deadlineInput" data-i18n="lblDeadline">Rok (Deadline)</label>
+                    <input type="number" id="deadlineInput" min="1" value="10">
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-danger" style="padding: 12px 24px;" onclick="resetProcesses()" data-i18n="btnReset">Resetuj sve</button>
+                <button class="action-btn" onclick="addProcess()" data-i18n="btnAdd">Dodaj proces</button>
+            </div>
+        </section>
+
+        <section class="card-section">
+            <div class="section-title" data-i18n="tableTitle">📋 Pregled procesa i statistika</div>
+            <div class="table-responsive">
+                <table id="processTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="thProc">Proces</th>
+                            <th data-i18n="thArrival">Dolazak</th>
+                            <th data-i18n="thBurst">Izvršavanje</th>
+                            <th id="thPeriod" style="display: table-cell;" data-i18n="thPeriod">Period (T)</th>
+                            <th id="thDeadline" style="display: table-cell;" data-i18n="thDeadline">Rok (D)</th>
+                            <th data-i18n="thComp">Završetak</th>
+                            <th data-i18n="thTurnaround">Vreme obilaska</th>
+                            <th data-i18n="thWaiting">Vreme čekanja</th>
+                            <th id="thRealTimeStatus" style="display: table-cell;" data-i18n="thStatus">Status Roka</th>
+                            <th data-i18n="thAction">Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody id="processTableBody"></tbody>
+                </table>
+            </div>
+            
+            <div class="results-summary" id="summarySection" style="display: none;">
+                <div id="avgTurnaround">Prosečno vreme obilaska: 0</div>
+                <div id="avgWaiting">Prosečno vreme čekanja: 0</div>
+            </div>
+
+            <!-- Sekcija sa formulama i računicom -->
+            <div class="calculation-box" id="calcSection" style="display: none;">
+                <h4 data-i18n="calcTitle">📐 Detaljna računica i koraci izračunavanja</h4>
+                <ul class="calc-steps-list" id="calcStepsList"></ul>
+            </div>
+        </section>
+
+        <section class="card-section" id="ganttSection" style="display: none;">
+            <div class="section-title" data-i18n="ganttTitle">📊 Gantt dijagram izvršavanja po procesorima</div>
+            <div class="gantt-container" id="ganttChartsContainer"></div>
+        </section>
+    </main>
+
+    <!-- JS fajl -->
+    <script src="script.js"></script>
+</body>
+</html>
