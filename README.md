@@ -1,7 +1,3 @@
-Evo ažuriranog `README.md` fajla za tvoj GitHub repozitorijum, u potpunosti na srpskom jeziku:
-
----
-
 # CPU Scheduling Visualizer
 
 Ovaj projekat predstavlja web aplikaciju dizajniranu za vizuelizaciju i demonstraciju različitih algoritama za raspoređivanje procesa (CPU Scheduling) koji se koriste u operativnim sistemima. Namenjen je studentima, profesorima i svima koji žele bolje da razumeju kako operativni sistem upravlja izvršavanjem procesa.
